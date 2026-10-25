@@ -106,12 +106,26 @@ describe('Desafio API - Parte 1', () => {
                     Authorization: `Bearer ${token}`
                 }
             });
+
         }).then((response) => {
-            // Validar os dados e os livros associados ao usuário
+
+            // Validar os dados do usuário e os livros
             expect(response.status).to.eq(200);
             expect(response.body.userId).to.eq(userId);
             expect(response.body.books).to.have.length(2);
 
+            // Exibir resultados no terminal
+            cy.task('log', '===== RESULTADO DA API =====');
+            cy.task('log', `User ID: ${response.body.userId}`);
+            cy.task('log', `Username: ${response.body.username}`);
+            cy.task('log', `Quantidade de livros: ${response.body.books.length}`);
+
+            response.body.books.forEach((book, index) => {
+                cy.task('log', `Livro ${index + 1}: ${book.title}`);
+                cy.task('log', `ISBN: ${book.isbn}`);
+            });
+
+            cy.task('log', '============================');
         });
     });
 });
