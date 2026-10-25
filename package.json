@@ -1,12 +1,20 @@
+
 {
   "name": "desafio-tecnico-accenture",
   "version": "1.0.0",
-  "description": "",
+  "description": "Desafio QA Automation Engineer - Accenture",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "cypress run",
+    "test:api": "cypress run --spec \"cypress/e2e/api-bookstore.cy.js\"",
+    "cy:open": "cypress open"
   },
-  "keywords": [],
+  "keywords": [
+    "qa",
+    "automation",
+    "cypress",
+    "api-testing"
+  ],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
