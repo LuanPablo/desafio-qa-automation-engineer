@@ -40,7 +40,7 @@ class ProgressBarPage {
                 expect(Number($bar.attr('aria-valuenow'))).to.equal(100);
             });
     }
-
+    
     reset() {
         cy.get('#resetButton', { timeout: 10000 })
             .should('be.visible')
