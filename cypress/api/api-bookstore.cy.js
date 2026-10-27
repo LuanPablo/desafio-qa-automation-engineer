@@ -6,6 +6,7 @@ describe('Desafio API - Parte 1', () => {
         const baseURL = 'https://demoqa.com';
         let userId;
         let token;
+        let selectedBooks;
 
         //Criar usuário
         cy.request({
@@ -71,7 +72,7 @@ describe('Desafio API - Parte 1', () => {
             //Selecionar dois livros
             const books = response.body.books;
 
-            const selectedBooks = [
+            selectedBooks = [
                 { isbn: books[0].isbn },
                 { isbn: books[1].isbn },
             ];
@@ -113,6 +114,8 @@ describe('Desafio API - Parte 1', () => {
             expect(response.status).to.eq(200);
             expect(response.body.userId).to.eq(userId);
             expect(response.body.books).to.have.length(2);
+            expect(response.body.books.map((book) => book.isbn))
+                .to.have.members(selectedBooks.map((book) => book.isbn));
 
             // Exibir resultados no terminal
             cy.task('log', '===== RESULTADO DA API =====');
