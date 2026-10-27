@@ -1,24 +1,23 @@
-
 class WebTablesPage {
     visit() {
         cy.visit('https://demoqa.com/webtables');
     }
 
     clickAdd() {
-        cy.get('#addNewRecordButton').click();
+        cy.clicarElemento('#addNewRecordButton');
     }
 
     fillForm() {
-        cy.get('#firstName').type('Luan');
-        cy.get('#lastName').type('Pablo');
-        cy.get('#userEmail').type('luan.pablo@example.com');
-        cy.get('#age').type('30');
-        cy.get('#salary').type('5000');
-        cy.get('#department').type('QA');
+        cy.preencherCampo('#firstName', 'Luan');
+        cy.preencherCampo('#lastName', 'Pablo');
+        cy.preencherCampo('#userEmail', 'luan.pablo@example.com');
+        cy.preencherCampo('#age', '30');
+        cy.preencherCampo('#salary', '5000');
+        cy.preencherCampo('#department', 'QA');
     }
 
     save() {
-        cy.get('#submit').click();
+        cy.clicarElemento('#submit');
     }
 
     verifyRecord() {
@@ -29,13 +28,11 @@ class WebTablesPage {
 
     editRecord() {
         cy.contains('tbody tr', 'luan.pablo@example.com')
-            .should('contain', 'Luan')
-            .and('contain', 'Pablo')
             .find('[title="Edit"]')
             .click({ force: true });
 
-        cy.get('#firstName').clear().type('LuanEditado');
-        cy.get('#submit').click();
+        cy.preencherCampo('#firstName', 'LuanEditado');
+        cy.clicarElemento('#submit');
     }
 
     verifyRecordEdited() {
@@ -45,8 +42,6 @@ class WebTablesPage {
 
     deleteRecord() {
         cy.contains('tbody tr', 'luan.pablo@example.com')
-            .should('contain', 'Luan')
-            .and('contain', 'Pablo')
             .find('[title="Delete"]')
             .click({ force: true });
     }

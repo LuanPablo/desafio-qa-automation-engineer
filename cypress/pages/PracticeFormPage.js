@@ -4,15 +4,15 @@ class PracticeFormPage {
     }
 
     fillFirstName(value) {
-        cy.get('#firstName').type(value);
+        cy.preencherCampo('#firstName', value);
     }
 
     fillLastName(value) {
-        cy.get('#lastName').type(value);
+        cy.preencherCampo('#lastName', value);
     }
 
     fillEmail(value) {
-        cy.get('#userEmail').type(value);
+        cy.preencherCampo('#userEmail', value);
     }
 
     selectGender(gender) {
@@ -20,19 +20,23 @@ class PracticeFormPage {
     }
 
     fillMobile(value) {
-        cy.get('#userNumber').type(value);
+        cy.preencherCampo('#userNumber', value);
     }
 
     selectDateOfBirth() {
         cy.get('#dateOfBirthInput').click();
         cy.get('.react-datepicker__year-select').select('1998');
         cy.get('.react-datepicker__month-select').select('May');
-        cy.get('.react-datepicker__day--015:not(.react-datepicker__day--outside-month)').click();
+        cy.get(
+            '.react-datepicker__day--015:not(.react-datepicker__day--outside-month)'
+        ).click();
     }
 
     fillSubject(value) {
         cy.get('#subjectsInput').type(value);
-        cy.get('.subjects-auto-complete__menu').contains(value).click();
+        cy.get('.subjects-auto-complete__menu')
+            .contains(value)
+            .click();
     }
 
     selectHobby(hobby) {
@@ -40,30 +44,38 @@ class PracticeFormPage {
     }
 
     uploadFile(fileName) {
-        cy.get('#uploadPicture').selectFile(`cypress/fixtures/${fileName}`);
+        cy.get('#uploadPicture')
+            .selectFile(`cypress/fixtures/${fileName}`);
     }
 
     fillAddress(value) {
-        cy.get('#currentAddress').type(value);
+        cy.preencherCampo('#currentAddress', value);
     }
 
     selectStateAndCity(state, city) {
-
         cy.get('#state').click();
-        cy.get('#state').find('[class*="-option"]').contains(state).click();
+        cy.get('#state')
+            .find('[class*="-option"]')
+            .contains(state)
+            .click();
 
         cy.get('#city').click();
-        cy.get('#city').find('[class*="-option"]').contains(city).click();
-
+        cy.get('#city')
+            .find('[class*="-option"]')
+            .contains(city)
+            .click();
     }
 
     submit() {
-        cy.get('#submit').click();
+        cy.clicarElemento('#submit');
     }
 
     verifyConfirmationModal() {
-        cy.get('.modal-content').should('be.visible');
-        cy.contains('Thanks for submitting the form').should('be.visible');
+        cy.validarElementoVisivel('.modal-content');
+        cy.validarTextoElemento(
+            '.modal-content',
+            'Thanks for submitting the form'
+        );
     }
 
     closeModal() {
